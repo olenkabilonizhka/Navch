@@ -5,52 +5,10 @@
 #include <string>
 using namespace std;
 
-int Command::StNum = 0;
-int Command::SfNum = 0;
-int Command::StemNum = 0;
 int Command::b = 0;
 int Command::m = 0;
 
 Command::Command() {
-	sts = new Student*[100];
-	ifstream fin3("Students.txt");
-	if (fin3.is_open()) {
-		while (!fin3.eof()) {
-			string name; string lastname; int year; char s[50];
-			fin3 >> name >> lastname >> year;
-			fin3.get(s, 50);
-			string course(s);
-			Student* temp = new Student(name, lastname, year, course);
-			sts[StNum++] = temp;
-		}
-	}
-	fin3.close();
-
-	ifstream fin5("StudentsEM.txt");
-	if (fin5.is_open()) {
-		while (!fin5.eof()) {
-			string name; string lastname; int year; char s[50];
-			fin5 >> name >> lastname >> year;
-			fin5.get(s, 50);
-			string course(s);
-			StudentEM* temp = new StudentEM(name, lastname, year, course);
-			AddStudentEM(*temp); StemNum++;
-		}
-	}
-	fin5.close();
-
-	stf = new Staff*[50];
-	ifstream fin4("Staff.txt");
-	if (fin4.is_open()) {
-		while (!fin4.eof()) {
-			string name; string lastname; string subject;
-			fin4 >> name >> lastname >> subject;
-			Staff* temp = new Staff(name, lastname, subject);
-			stf[SfNum++] = temp;
-		}
-	}
-	fin4.close();
-
 	bachelor = new string[10];
 	ifstream fin("Bachelor.txt");
 	if (fin.is_open()) {
@@ -68,10 +26,15 @@ Command::Command() {
 	list = new StaffAcademics*[6];
 	StaffAcademics* r;
 	for (int i = 0; i < 6; i++) {
-		if (SfNum < 6) { r = new StaffAcademics(*stf[i%SfNum], i + 1); }
-		else { r = new StaffAcademics(*stf[i], i + 1); }
+		Staff* s = (Staff*)StfRepository[i];
+		if (StfRepository.Size() < 6) { r = new StaffAcademics(*StfRepository[i % (StfRepository.Size())], i + 1); }
+		else { r = new StaffAcademics(*StfRepository[i], i + 1); }
 		list[i] = r;
 	}
+}
+
+int Command::GetSfNum() {
+	return StfRepository.Size();
 }
 
 template <typename T>
@@ -93,37 +56,23 @@ int Command::File(istream& fin, T* mass, int max) {
 }
 
 void Command::AddStudentEM(StudentEM& stem) {
-	AddStudent(stem);
+	StsRepository.Add(stem);
 }
 
 void Command::AddStudent(Student& st) {
-	try {
-		if (StNum >= 100)
-			throw "No memory!";
-		sts[StNum++] = &st;
-	}
-	catch (string a) { cout << a << endl; }
+	StsRepository.Add(st);
 }
 
 void Command::AddStaff(Staff& sf) {
-	try {
-		if (StNum >= 100)
-			throw "No memory!";
-		stf[SfNum++] = &sf;
-	}
-	catch (string a) { cout << a << endl; }
+	StfRepository.Add(sf);
 }
 
 void Command::AllStudents() {
-	for (int i = 0; i < StNum; i++) {
-		sts[i]->Print();
-	}
+	StsRepository.PrintAll();
 }
 
 void Command::AllStaff() {
-	for (int i = 0; i < SfNum; i++) {
-		stf[i]->Print();
-	}
+	StfRepository.PrintAll();
 }
 
 void Command::Courators() {
@@ -150,20 +99,16 @@ void Command::ChangeCour(int year, int prof) {
 		cout << "Didn't add!" << endl;
 	}
 	else {
-		list[year - 1] = new StaffAcademics(*stf[prof - 1], year);
+		list[year - 1] = new StaffAcademics(*StfRepository[prof - 1], year);
 	}
-}
-
-int Command::GetSfNum() {
-	return SfNum;
 }
 
 string Command::PopLang() {
 	int mx = 0; string mxst;
 	for (int i = 0; i < b; i++) {
 		int n = 0;
-		for (int j = 0; j < StNum; j++) {
-			if (bachelor[i] == sts[j]->GetCourse())
+		for (int j = 0; j < StsRepository.Size(); j++) {
+			if (bachelor[i] == StsRepository[j]->GetCourse())
 				n++;
 		}
 		if (n > mx) {
@@ -176,59 +121,21 @@ string Command::PopLang() {
 
 int Command::PopYear() {
 	int mx = 0; int maxyear = 0;
-	for (int i = 0; i < StNum; i++) {
+	for (int i = 0; i < StsRepository.Size(); i++) {
 		int n = 0;
-		for (int j = i; j < StNum; j++) {
-			if (sts[i]->GetYear() == sts[j]->GetYear())
+		for (int j = i; j < StsRepository.Size(); j++) {
+			if (StsRepository[i]->GetYear() == StsRepository[j]->GetYear())
 				n++;
 		}
 		if (n > mx) {
 			mx = n;
-			maxyear = sts[i]->GetYear();
+			maxyear = StsRepository[i]->GetYear();
 		}
 	}
 	return maxyear;
 }
 
 Command::~Command() {
-	ofstream fout("Students.txt");
-	for (int i = 0; i < StNum; i++) {
-		if (sts[i]->ti() == "Student") {
-			if (i != 0) fout << endl;
-			fout << sts[i]->GetName() << " " << sts[i]->GetLastname() << " " << sts[i]->GetYear() << sts[i]->GetCourse();
-		}
-	}
-	fout.close();
-
-	ofstream fout2("Staff.txt");
-	for (int i = 0; i < SfNum; i++) {
-		fout2 << stf[i]->GetName() << " " << stf[i]->GetLastname() << " " << stf[i]->GetSubject();
-		if (i != (SfNum - 1)) { fout2 << endl; }
-	}
-	fout2.close();
-
-	ofstream fout3("StudentsEM.txt"); int j = 1;
-	for (int i = 0; i < StNum; i++) {
-		if (sts[i]->ti() == "StudentEM") {
-			if (j == 0) { fout3 << endl; }
-			else { j--; }
-			fout3 << sts[i]->GetName() << " " << sts[i]->GetLastname() << " " << sts[i]->GetYear() << sts[i]->GetCourse();
-		}
-	}
-	fout3.close();
-
-	//cout << "Added to file!" << endl;
-	for (int i = 0; i < StNum; i++) {
-		delete sts[i];
-	}
-	for (int i = 0; i < SfNum; i++) {
-		delete stf[i];
-	}
-	for (int i = 0; i < 6; i++) {
-		delete list[i];
-	}
-	delete[] sts;
-	delete[] stf;
 	delete[] bachelor;
 	delete[] master;
 	delete[] list;

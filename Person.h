@@ -2,6 +2,7 @@
 #define PERSON_H
 
 #include <string>
+#include "Entity.h"
 using namespace std;
 
 class Person {

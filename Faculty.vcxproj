@@ -114,17 +114,24 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Repository.cpp" />
     <ClCompile Include="Staff.cpp" />
     <ClCompile Include="StaffAcademics.cpp" />
+    <ClCompile Include="StaffRepository.cpp" />
     <ClCompile Include="Student.cpp" />
+    <ClCompile Include="StudentRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="Repository.h" />
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StaffAcademics.h" />
+    <ClInclude Include="StaffRepository.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentEM.h" />
+    <ClInclude Include="StudentRepository.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

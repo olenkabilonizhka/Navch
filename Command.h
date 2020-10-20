@@ -5,19 +5,18 @@
 #include "Staff.h"
 #include "StaffAcademics.h"
 #include "StudentEM.h"
+#include "StudentRepository.h"
+#include "StaffRepository.h"
 #include <string>
 using namespace std;
 
 class Command {
 private:
-	Student** sts;
-	Staff** stf;
+	StudentRepository StsRepository = StudentRepository(true);
+	StaffRepository StfRepository = StaffRepository(true);
 	string* bachelor;
 	string* master;
 	StaffAcademics** list;
-	static int StNum;
-	static int SfNum;
-	static int StemNum;
 	static int b;
 	static int m;
 public:
@@ -31,8 +30,8 @@ public:
 	void GetBach();
 	void GetMast();
 	void ChangeCour(int = -1, int = -1);
-	int GetSfNum();
 	int PopYear();
+	int GetSfNum();
 	string PopLang();
 	template <typename T>
 	static int File(istream&, T*, int);
@@ -40,4 +39,5 @@ public:
 };
 
 #endif 
+
 

@@ -13,24 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Entity">
+      <UniqueIdentifier>{4f6a2634-2eb8-4eb5-992f-78220c883e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entitycpp">
+      <UniqueIdentifier>{f9b16519-a8da-491b-8a6d-e387a9d4a4a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Person.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Student.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\Entitycpp</Filter>
     </ClCompile>
     <ClCompile Include="Staff.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entitycpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Source Files\Entitycpp</Filter>
     </ClCompile>
     <ClCompile Include="StaffAcademics.cpp">
+      <Filter>Source Files\Entitycpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Repository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StudentRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaffRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,19 +53,31 @@
     <ClInclude Include="Command.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Person.h">
+    <ClInclude Include="Entity.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Resource Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Staff.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="StaffAcademics.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Student.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="StudentEM.h">
+      <Filter>Resource Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Repository.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentRepository.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaffRepository.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
