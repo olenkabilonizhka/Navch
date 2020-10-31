@@ -1,14 +1,2 @@
-﻿  main.cpp
-  StudentRepository.cpp
-  StaffRepository.cpp
-  Generating Code...
-  Compiling...
-  StaffAcademics.cpp
-  Repository.cpp
-  Command.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Student.cpp
-  Staff.cpp
-  Person.cpp
+﻿  Command.cpp
   Faculty.vcxproj -> D:\c++\2 курс\lessons\navchalna\Faculty\Debug\Faculty.exe

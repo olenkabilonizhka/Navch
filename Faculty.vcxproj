@@ -133,6 +133,13 @@
     <ClInclude Include="StudentEM.h" />
     <ClInclude Include="StudentRepository.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Bachelor.txt" />
+    <Text Include="Master.txt" />
+    <Text Include="Staff.txt" />
+    <Text Include="Students.txt" />
+    <Text Include="StudentsEM.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
